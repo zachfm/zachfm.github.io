@@ -1,8 +1,8 @@
 div#menu_bar{
 	text-align: center;
-	color: #ACC18A;
+	color: #427AA1;
 	border:10px solid;
-	background-color: red;
+	border-color: #427AA1;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -10,7 +10,7 @@ div#menu_bar{
 	padding-bottom:25px;	
 	height: 50px;
 	margin:0;
-	background-color: #F2FBE0;
+	background-color: #EBF2FA;
 	
 }
 a.nostyle:link,a.nostyle:visited {
@@ -24,8 +24,8 @@ div#article_title{
 	margin-right:10px;
 	margin-bottom:0px;
 	text-align: center;
-	color: #F2FBE0;
-	background-color: #889B74;
+	color: #EBF2FA;
+	background-color: #064789;
 }
 div#article_content{
 	margin-top: 0px;
@@ -34,8 +34,8 @@ div#article_content{
 	margin-bottom:10px;
 	text-align: left;
 	padding: 10px;
-	color: #605B56;
-	background-color: #F2FBE0;
+	color: #173A5E;
+	background-color: #EBF2FA;
 }
 h1{
 	font-size: 24pt;
@@ -53,16 +53,13 @@ h5{
 body{
 	margin:0;
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	background-color: #ACC18A;
+	background-color: #427AA1;
 }
-
 p{
 	font-size: 12pt;
 	padding-left: 100px;
-	color:	#837A75;
 }
 ul{
 	font-size: 12pt;
 	padding-left: 100px;
-	color:	#837A75;
 }
