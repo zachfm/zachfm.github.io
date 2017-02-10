@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Arduino Workshop 2-10-17</title>
+	<meta charset="utf-8"/>
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="highlighter/styles/default.css">
+	<script src="highlighter/highlight.pack.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	</head>
+	
+<body>
+<h1>Arduino Workshop 2-10-17</h1>
+<p>
+This tutorial assumes you have some general coding experience. Arduino is in essence C++ with some extra built-in functions, so almost all basic syntax will directly transfer. Don't worry if you're not familiar with C++ or coding in general, just let us know and we'll help you through it.
+</p>
+<h3>Getting Set Up</h3>
+<p>
+When you open up a new sketch in Arduino IDE, it'll give you something like this:
+</p>
+<pre><code class="arduino-light">
+void setup() {
+  // put your setup code here, to run once:
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+}
+</code></pre>
+<p>
+Everything in "setup" will be executed when the Arduino first powers up. This is a suitable time to initialize any variables, run other preparatory functions, etc.
+After setup has completed, the Arduino will repeatedly execute "loop" until you turn it off (by unplugging it).
+</p>
+
+<p>
+Let's try transferring the code to the Arduino. It wont actually DO anything yet, but it'll ensure we have everything set up right before moving on.
+</p>
+<p>
+First, you'll want to set which board you will be sending the code to. There are many different models of Arduino, but today we'll be using the Arduino Uno. Go to Tools>Board and select "Arduino/Geniuno Uno" from the menu.
+</p>
+<p>
+Now plug your Arduino into your computer. To specify to Arduino IDE which USB port to use, go to Tools>Port and select an option. There will probably only be one option, since you only connected one arduino.
+</p>
+<p>
+To compile, press the blue check on the top left of the window. You should see some text on the black console on the bottom of the window. If you make a mistake in your code, errors will be listed there when you compile.
+</p>
+<p>
+Finally, press the rightward-facing arrow, to the right of the check, to send your code to the Arduino. Your arduino will restart, and will start running whatever you sent it (in this case, nothing).
+</p>
+
+<p>
+Okay, so it works. Now let's make it display some text. But how? There is no screen!<br>
+To print a test message, we'll be sending text over USB back to the computer, where we can view it. In case you didn't know, USB stands for "Universal Serial Bus". Arduino has a built in way of communicating over USB, using the aptly named "Serial" class. Here's some code to copy-paste into your sketch:
+</p>
+<pre><code class="arduino-light">
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600); //open a serial connection to the computer
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  Serial.println("Hello World!"); //send the line "Hello World!"
+}
+</code></pre>
+<p>
+In the setup block, we start up a serial connection to the computer over USB. The number inside the parentheses is the <i>baud rate.</i> That tells the Arduino how fast it should send messages, but you don't need to worry about that. Just leave it at 9600, as it's the standard speed for this purpose.
+</p>
+<p>
+In the loop block, we send "Hello World!" over and over and over again, with the function "println". To test this, compile and send the code as before, and then click on the magnifying glass on the top right of the window. This will open up a window displaying all messages received from your Arduino. You should see the messages coming in from your Arduino in this window.
+</p>
+<h3>Reading and Writing to Pins</h3>
+<p>
+In order for our Arduino to interact with a circuit, we'll need to know how to read and write to the pins. Arduino has 20 input/output pins (6 analog, 14 digital), all running at 5V. Analog pins can read or write digitally, but can also read or set voltages anywhere between 0V and 5V with 1024 voltage levels of resolution.
+</p>
+<p>
+Before we can interact with a pin, we must tell Arduino whether we will be using it as an output or an input using the built in pinMode function. After setting this, we can set the voltage on an output pin using digitalWrite and analogWrite. To get a voltage reading from an input pin, use digitalRead or analogRead. It's easiest to show how this works with an example:
+</p>
+<pre><code class="arduino-light">
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600); //open a serial connection to the computer
+  
+  pinMode(0, INPUT); //configure digital pin 0 as an input
+  pinMode(A0, INPUT); //configure analog pin 0 as an input
+  pinMode(13, OUTPUT); //digital pin 13 as output
+  pinMode(A1, OUTPUT);
+  
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  
+  analogWrite(A1, 512) //set pin A1 to 2.5V - that's 5V*(512/1023)
+  digitalWrite(13, HIGH); //set pin 0 to 5V
+  //digitalWrite(13, 1); or digitalWrite(13, true); is equivalent
+  
+  Serial.println("voltage level at pin A0 is:");
+  Serial.println(analogRead(A0)); //sends an integer between 0 and 1023
+  Serial.println("logic level at pin 0 is:");
+  Serial.println(digitalRead(0)); //sends integer 0 or 1
+  
+}
+</code></pre>
+<p>
+Try this code out. Test pin 13 and A1 with a voltmeter. You should see 5V and 2.5V, respectively. Now open up the serial monitor on your computer, and try connecting A0 to the 5V pin on the arduino with a wire. You should see a value of around 1023.
+</p>
+
+<h3>Useful Links</h3>
+<p>
+<a href = https://www.arduino.cc/en/Reference/HomePage>
+Arduino official docs</a>
+</p>
+<p>
+<a href = http://ecee.colorado.edu/~mathys/ecen2250/myDAQ01/breadboard_90.png>
+Visual representation of how breadboards are connected</a>
+</p>
+
+
+</body>
